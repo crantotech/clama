@@ -1,3 +1,11 @@
+# Cranto-Bot
+
+An open-source agent for autonomous coding, tailored for enterprise needs. A fork of Cline. Cranto is a made-up name, a quirky mix of **cran**berry and toma**to**!
+
+## Disclaimer
+
+Please note that Cranto Technology, Inc. provides no representations or warranties regarding the code, models, tools, or outputs associated with Cranto-Bot or any related third-party tools. All use of these tools or outputs is at your own risk, as they are offered on an "AS IS" and "AS AVAILABLE" basis. These risks may include, but are not limited to, intellectual property infringement, cybersecurity vulnerabilities or attacks, bias, inaccuracies, errors, defects, viruses, downtime, property damage, loss, or personal injury. You bear full responsibility for the use of these tools or outputs, including their legality, appropriateness, and any resulting consequences.
+
 # Cline (prev. Claude Dev) – \#1 on OpenRouter
 
 <p align="center">

@@ -1,7 +1,7 @@
 {
-	"name": "claude-dev",
-	"displayName": "Cline (prev. Claude Dev)",
-	"description": "Autonomous coding agent right in your IDE, capable of creating/editing files, running commands, using the browser, and more with your permission every step of the way.",
+	"name": "cranto-bot",
+	"displayName": "Cranto Bot",
+	"description": "An open-source agent for autonomous coding, tailored for enterprise needs.",
 	"version": "3.1.1",
 	"icon": "assets/icons/icon.png",
 	"galleryBanner": {
@@ -12,15 +12,15 @@
 		"vscode": "^1.84.0"
 	},
 	"author": {
-		"name": "Cline Bot Inc."
+		"name": "Cronto Technology Inc."
 	},
 	"license": "Apache-2.0",
-	"publisher": "saoudrizwan",
+	"publisher": "vivek-kothandapani",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cline/cline"
+		"url": "https://github.com/cranto-tech/cranto-bot"
 	},
-	"homepage": "https://cline.bot",
+	"homepage": "https://cranto.bot",
 	"categories": [
 		"AI",
 		"Chat",
@@ -30,18 +30,13 @@
 		"Testing"
 	],
 	"keywords": [
-		"cline",
-		"claude",
+		"cranto",
+		"crantobot",
 		"dev",
-		"mcp",
-		"openrouter",
 		"coding",
 		"agent",
 		"autonomous",
-		"chatgpt",
-		"sonnet",
-		"ai",
-		"llama"
+		"ai"
 	],
 	"activationEvents": [],
 	"main": "./dist/extension.js",
