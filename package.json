@@ -2,7 +2,7 @@
 	"name": "clama",
 	"displayName": "Clama",
 	"description": "An open-source coding assistant optimized for enterprise-grade workflows.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"icon": "assets/icons/icon.png",
 	"galleryBanner": {
 		"color": "#617A91",
