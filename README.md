@@ -4,11 +4,11 @@ An open-source coding assistant optimized for enterprise-grade workflows. This p
 
 Goals:
 
-- Lightweight extension.
-- Restrict AI models.
-- Server side components and AIOps setup.
-- Aditional Admin controls.
-- And more...
+-   Lightweight extension.
+-   Restrict AI models.
+-   Server side components and AIOps setup.
+-   Aditional Admin controls.
+-   And more...
 
 <a href="https://marketplace.visualstudio.com/items?itemName=crantotech.clama" target="_blank"><strong>Download on VS Marketplace</strong></a>
 
@@ -51,9 +51,9 @@ With Claude 3.5 Sonnet's new [Computer Use](https://www.anthropic.com/news/3-5-m
 
 Thanks to the [Model Context Protocol](https://github.com/modelcontextprotocol), Clama can extend his capabilities through custom tools. While you can use [community-made servers](https://github.com/modelcontextprotocol/servers), Clama can instead create and install tools tailored to your specific workflow. Just ask Clama to "add a tool" and it will handle everything, from creating a new MCP server to installing it into the extension. These custom tools then become part of Clama's toolkit, ready to use in future tasks.
 
-- "add a tool that fetches Jira tickets": Retrieve ticket ACs and put Clama to work
-- "add a tool that manages AWS EC2s": Check server metrics and scale instances up or down
-- "add a tool that pulls the latest PagerDuty incidents": Fetch details and ask Clama to fix bugs
+-   "add a tool that fetches Jira tickets": Retrieve ticket ACs and put Clama to work
+-   "add a tool that manages AWS EC2s": Check server metrics and scale instances up or down
+-   "add a tool that pulls the latest PagerDuty incidents": Fetch details and ask Clama to fix bugs
 
 ### Add Context
 
@@ -92,7 +92,6 @@ For example, when working with a local web server, you can use 'Restore Workspac
     ```
 
 4. Launch by pressing `F5` (or `Run`->`Start Debugging`) to open a new VSCode window with the extension loaded. (You may need to install the [esbuild problem matchers extension](https://marketplace.visualstudio.com/items?itemName=connor4312.esbuild-problem-matchers) if you run into issues building the project.)
-
 
 ## License
 

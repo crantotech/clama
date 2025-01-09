@@ -15,7 +15,7 @@ https://github.com/microsoft/vscode-webview-ui-toolkit-samples/tree/main/default
 https://github.com/microsoft/vscode-webview-ui-toolkit-samples/tree/main/frameworks/hello-world-react-cra
 
 */
-const name = 'Clama'
+const name = "Clama"
 const commandPrefx = name.toLowerCase()
 let outputChannel: vscode.OutputChannel
 
