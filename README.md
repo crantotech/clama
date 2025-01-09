@@ -2,12 +2,14 @@
 
 An open-source coding assistant optimized for enterprise-grade workflows. This project is a fork of Cline.
 
-Goals:
+This is a work in progress.
 
--   Lightweight extension.
--   Restrict AI models.
--   Server side components and AIOps setup.
--   Aditional Admin controls.
+Target features include:
+
+-   Lightweight extension
+-   Restrict AI models
+-   Server-side components and AIOps setup
+-   Admin controls
 -   And more...
 
 <a href="https://marketplace.visualstudio.com/items?itemName=crantotech.clama" target="_blank"><strong>Download on VS Marketplace</strong></a>
