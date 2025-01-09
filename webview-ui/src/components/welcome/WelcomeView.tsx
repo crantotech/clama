@@ -30,7 +30,7 @@ const WelcomeView = () => {
 				bottom: 0,
 				padding: "0 20px",
 			}}>
-			<h2>Clama - A Variation of Cline</h2>
+			<h2>Clama (Demo) - A Variation of Cline</h2>
 			<p>
 				Clama is an open-source coding assistant optimized for enterprise-grade workflows. This is a work in progress.
 				Target features include:
