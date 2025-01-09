@@ -8,7 +8,7 @@ import { DecorationController } from "./DecorationController"
 import * as diff from "diff"
 import { diagnosticsToProblemsString, getNewDiagnostics } from "../diagnostics"
 
-export const DIFF_VIEW_URI_SCHEME = "cline-diff"
+export const DIFF_VIEW_URI_SCHEME = "clama-diff"
 
 export class DiffViewProvider {
 	editType?: "create" | "modify"
@@ -171,7 +171,7 @@ export class DiffViewProvider {
 		Getting diagnostics before and after the file edit is a better approach than
 		automatically tracking problems in real-time. This method ensures we only
 		report new problems that are a direct result of this specific edit.
-		Since these are new problems resulting from Cline's edit, we know they're
+		Since these are new problems resulting from Clama's edit, we know they're
 		directly related to the work he's doing. This eliminates the risk of Cline
 		going off-task or getting distracted by unrelated issues, which was a problem
 		with the previous auto-debug approach. Some users' machines may be slow to
@@ -319,7 +319,7 @@ export class DiffViewProvider {
 					query: Buffer.from(this.originalContent ?? "").toString("base64"),
 				}),
 				uri,
-				`${fileName}: ${fileExists ? "Original ↔ Cline's Changes" : "New File"} (Editable)`,
+				`${fileName}: ${fileExists ? "Original ↔ Clama's Changes" : "New File"} (Editable)`,
 			)
 			// This may happen on very slow machines ie project idx
 			setTimeout(() => {

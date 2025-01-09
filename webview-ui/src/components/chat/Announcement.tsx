@@ -9,7 +9,7 @@ interface AnnouncementProps {
 	hideAnnouncement: () => void
 }
 /*
-You must update the latestAnnouncementId in ClineProvider for new announcements to show to users. This new id will be compared with whats in state for the 'last announcement shown', and if it's different then the announcement will render. As soon as an announcement is shown, the id will be updated in state. This ensures that announcements are not shown more than once, even if the user doesn't close it themselves.
+You must update the latestAnnouncementId in ClamaProvider for new announcements to show to users. This new id will be compared with whats in state for the 'last announcement shown', and if it's different then the announcement will render. As soon as an announcement is shown, the id will be updated in state. This ensures that announcements are not shown more than once, even if the user doesn't close it themselves.
 */
 const Announcement = ({ version, hideAnnouncement }: AnnouncementProps) => {
 	const minorVersion = version.split(".").slice(0, 2).join(".") // 2.0.0 -> 2.0
@@ -31,7 +31,7 @@ const Announcement = ({ version, hideAnnouncement }: AnnouncementProps) => {
 			</h3>
 			<ul style={{ margin: "0 0 8px", paddingLeft: "12px" }}>
 				<li>
-					<b>Checkpoints are here!</b> Cline now saves a snapshot of your workspace at each step of the task. Hover over
+					<b>Checkpoints are here!</b> Clama now saves a snapshot of your workspace at each step of the task. Hover over
 					any message to see two new buttons:
 					<ul style={{ margin: "4px 0", paddingLeft: 22 }}>
 						<li>
@@ -55,7 +55,7 @@ const Announcement = ({ version, hideAnnouncement }: AnnouncementProps) => {
 					</ul>
 				</li>
 				<li>
-					<b>'See new changes' button</b> when a task is completed, showing you an overview of all the changes Cline
+					<b>'See new changes' button</b> when a task is completed, showing you an overview of all the changes Clama
 					made to your workspace throughout the task
 				</li>
 			</ul>
@@ -98,16 +98,16 @@ const Announcement = ({ version, hideAnnouncement }: AnnouncementProps) => {
 					)}
 				</li> 
 				<li>
-					<b>Edit Cline's changes before accepting!</b> When he creates or edits a file, you can modify his
+					<b>Edit Clama's changes before accepting!</b> When he creates or edits a file, you can modify his
 					changes directly in the right side of the diff view (+ hover over the 'Revert Block' arrow button in
 					the center to undo "<code>{"// rest of code here"}</code>" shenanigans)
 				</li>
 				<li>
-					New <code>search_files</code> tool that lets Cline perform regex searches in your project, letting
+					New <code>search_files</code> tool that lets Clama perform regex searches in your project, letting
 					him refactor code, address TODOs and FIXMEs, remove dead code, and more!
 				</li>
 				<li>
-					When Cline runs commands, you can now type directly in the terminal (+ support for Python
+					When Clama runs commands, you can now type directly in the terminal (+ support for Python
 					environments)
 				</li>
 			</ul>*/}
@@ -119,13 +119,6 @@ const Announcement = ({ version, hideAnnouncement }: AnnouncementProps) => {
 					margin: "8px 0",
 				}}
 			/>
-			<p style={{ margin: "0" }}>
-				Join
-				<VSCodeLink style={{ display: "inline" }} href="https://discord.gg/cline">
-					discord.gg/cline
-				</VSCodeLink>
-				for more updates!
-			</p>
 		</div>
 	)
 }

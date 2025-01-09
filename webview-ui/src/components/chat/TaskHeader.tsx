@@ -384,7 +384,7 @@ const TaskHeader: React.FC<TaskHeaderProps> = ({
 											<>
 												{" "}
 												<a
-													href="https://github.com/cline/cline/wiki/Installing-Git-for-Checkpoints"
+													href="https://github.com/crantotech/clama/wiki/Installing-Git-for-Checkpoints"
 													style={{
 														color: "inherit",
 														textDecoration: "underline",
