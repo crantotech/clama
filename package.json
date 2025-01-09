@@ -1,8 +1,8 @@
 {
-	"name": "cranto-bot",
-	"displayName": "Cranto Bot",
-	"description": "An open-source agent for autonomous coding, tailored for enterprise needs.",
-	"version": "3.1.1",
+	"name": "clama",
+	"displayName": "Clama",
+	"description": "An open-source coding assistant optimized for enterprise-grade workflows.",
+	"version": "1.0.2",
 	"icon": "assets/icons/icon.png",
 	"galleryBanner": {
 		"color": "#617A91",
@@ -12,15 +12,15 @@
 		"vscode": "^1.84.0"
 	},
 	"author": {
-		"name": "Cronto Technology Inc."
+		"name": "vivek kothandapani"
 	},
 	"license": "Apache-2.0",
-	"publisher": "vivek-kothandapani",
+	"publisher": "crantotech",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cranto-tech/cranto-bot"
+		"url": "https://github.com/crantotech/clama"
 	},
-	"homepage": "https://cranto.bot",
+	"homepage": "https://clama.ai",
 	"categories": [
 		"AI",
 		"Chat",
@@ -30,8 +30,8 @@
 		"Testing"
 	],
 	"keywords": [
+		"clama",
 		"cranto",
-		"crantobot",
 		"dev",
 		"coding",
 		"agent",
@@ -44,79 +44,79 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "claude-dev-ActivityBar",
-					"title": "Cline",
+					"id": "clama-ActivityBar",
+					"title": "Clama",
 					"icon": "$(robot)"
 				}
 			]
 		},
 		"views": {
-			"claude-dev-ActivityBar": [
+			"clama-ActivityBar": [
 				{
 					"type": "webview",
-					"id": "claude-dev.SidebarProvider",
+					"id": "clama.SidebarProvider",
 					"name": ""
 				}
 			]
 		},
 		"commands": [
 			{
-				"command": "cline.plusButtonClicked",
+				"command": "clama.plusButtonClicked",
 				"title": "New Task",
 				"icon": "$(add)"
 			},
 			{
-				"command": "cline.mcpButtonClicked",
+				"command": "clama.mcpButtonClicked",
 				"title": "MCP Servers",
 				"icon": "$(server)"
 			},
 			{
-				"command": "cline.historyButtonClicked",
+				"command": "clama.historyButtonClicked",
 				"title": "History",
 				"icon": "$(history)"
 			},
 			{
-				"command": "cline.popoutButtonClicked",
+				"command": "clama.popoutButtonClicked",
 				"title": "Open in Editor",
 				"icon": "$(link-external)"
 			},
 			{
-				"command": "cline.settingsButtonClicked",
+				"command": "clama.settingsButtonClicked",
 				"title": "Settings",
 				"icon": "$(settings-gear)"
 			},
 			{
-				"command": "cline.openInNewTab",
+				"command": "clama.openInNewTab",
 				"title": "Open In New Tab",
-				"category": "Cline"
+				"category": "Clama"
 			}
 		],
 		"menus": {
 			"view/title": [
 				{
-					"command": "cline.plusButtonClicked",
+					"command": "clama.plusButtonClicked",
 					"group": "navigation@1",
-					"when": "view == claude-dev.SidebarProvider"
+					"when": "view == clama.SidebarProvider"
 				},
 				{
-					"command": "cline.mcpButtonClicked",
+					"command": "clama.mcpButtonClicked",
 					"group": "navigation@2",
-					"when": "view == claude-dev.SidebarProvider"
+					"when": "view == clama.SidebarProvider"
 				},
 				{
-					"command": "cline.historyButtonClicked",
+					"command": "clama.historyButtonClicked",
 					"group": "navigation@3",
-					"when": "view == claude-dev.SidebarProvider"
+					"when": "view == clama.SidebarProvider"
 				},
 				{
-					"command": "cline.popoutButtonClicked",
+					"command": "clama.popoutButtonClicked",
 					"group": "navigation@4",
-					"when": "view == claude-dev.SidebarProvider"
+					"when": "view == clama.SidebarProvider"
 				},
 				{
-					"command": "cline.settingsButtonClicked",
+					"command": "clama.settingsButtonClicked",
 					"group": "navigation@5",
-					"when": "view == claude-dev.SidebarProvider"
+					"when": "view == clama.SidebarProvider"
 				}
 			]
 		}
