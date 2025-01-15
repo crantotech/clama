@@ -7,7 +7,6 @@ export interface AutoApprovalSettings {
     editFiles: boolean; // Edit files
     executeCommands: boolean; // Execute safe commands
     useBrowser: boolean; // Use browser
-    useMcp: boolean; // Use MCP servers
   };
   // Global settings
   maxRequests: number; // Maximum number of auto-approved requests
@@ -21,7 +20,6 @@ export const DEFAULT_AUTO_APPROVAL_SETTINGS: AutoApprovalSettings = {
     editFiles: false,
     executeCommands: false,
     useBrowser: false,
-    useMcp: false,
   },
   maxRequests: 20,
   enableNotifications: false,

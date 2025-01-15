@@ -1,10 +1,10 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react"
+import type React from "react"
+import { createContext, useCallback, useContext, useEffect, useState } from "react"
 import { useEvent } from "react-use"
 import { DEFAULT_AUTO_APPROVAL_SETTINGS } from "../../../src/shared/AutoApprovalSettings"
-import { ExtensionMessage, ExtensionState } from "../../../src/shared/ExtensionMessage"
-import { ApiConfiguration, ModelInfo, openRouterDefaultModelId, openRouterDefaultModelInfo } from "../../../src/shared/api"
+import type { ExtensionMessage, ExtensionState } from "../../../src/shared/ExtensionMessage"
+import { type ApiConfiguration, type ModelInfo, openRouterDefaultModelId, openRouterDefaultModelInfo } from "../../../src/shared/api"
 import { findLastIndex } from "../../../src/shared/array"
-import { McpServer } from "../../../src/shared/mcp"
 import { convertTextMateToHljs } from "../utils/textMateToHljs"
 import { vscode } from "../utils/vscode"
 
@@ -13,7 +13,6 @@ interface ExtensionStateContextType extends ExtensionState {
 	showWelcome: boolean
 	theme: any
 	openRouterModels: Record<string, ModelInfo>
-	mcpServers: McpServer[]
 	filePaths: string[]
 	setApiConfiguration: (config: ApiConfiguration) => void
 	setCustomInstructions: (value?: string) => void
@@ -39,7 +38,6 @@ export const ExtensionStateContextProvider: React.FC<{
 	const [openRouterModels, setOpenRouterModels] = useState<Record<string, ModelInfo>>({
 		[openRouterDefaultModelId]: openRouterDefaultModelInfo,
 	})
-	const [mcpServers, setMcpServers] = useState<McpServer[]>([])
 
 	const handleMessage = useCallback((event: MessageEvent) => {
 		const message: ExtensionMessage = event.data
@@ -97,10 +95,6 @@ export const ExtensionStateContextProvider: React.FC<{
 				})
 				break
 			}
-			case "mcpServers": {
-				setMcpServers(message.mcpServers ?? [])
-				break
-			}
 		}
 	}, [])
 
@@ -116,7 +110,6 @@ export const ExtensionStateContextProvider: React.FC<{
 		showWelcome,
 		theme,
 		openRouterModels,
-		mcpServers,
 		filePaths,
 		setApiConfiguration: (value) =>
 			setState((prevState) => ({

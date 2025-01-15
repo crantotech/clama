@@ -11,7 +11,6 @@ import { openFile, openImage } from "../../integrations/misc/open-file";
 import { selectImages } from "../../integrations/misc/process-images";
 import { getTheme } from "../../integrations/theme/getTheme";
 import WorkspaceTracker from "../../integrations/workspace/WorkspaceTracker";
-import { McpHub } from "../../services/mcp/McpHub";
 import { type AutoApprovalSettings, DEFAULT_AUTO_APPROVAL_SETTINGS } from "../../shared/AutoApprovalSettings";
 import type { ExtensionMessage, ExtensionState } from "../../shared/ExtensionMessage";
 import type { HistoryItem } from "../../shared/HistoryItem";
@@ -66,7 +65,6 @@ export const GlobalFileNames = {
   apiConversationHistory: "api_conversation_history.json",
   uiMessages: "ui_messages.json",
   openRouterModels: "openrouter_models.json",
-  mcpSettings: "clama_mcp_settings.json",
   clineRules: ".clamarules",
 };
 
@@ -78,7 +76,6 @@ export class ClineProvider implements vscode.WebviewViewProvider {
   private view?: vscode.WebviewView | vscode.WebviewPanel;
   private cline?: Cline;
   private workspaceTracker?: WorkspaceTracker;
-  mcpHub?: McpHub;
   private latestAnnouncementId = "jan-6-2025"; // update to some unique identifier when we add a new announcement
 
   constructor(
@@ -88,7 +85,6 @@ export class ClineProvider implements vscode.WebviewViewProvider {
     this.outputChannel.appendLine("ClamaProvider instantiated");
     ClineProvider.activeInstances.add(this);
     this.workspaceTracker = new WorkspaceTracker(this);
-    this.mcpHub = new McpHub(this);
   }
 
   /*
@@ -112,8 +108,6 @@ export class ClineProvider implements vscode.WebviewViewProvider {
     }
     this.workspaceTracker?.dispose();
     this.workspaceTracker = undefined;
-    this.mcpHub?.dispose();
-    this.mcpHub = undefined;
     this.outputChannel.appendLine("Disposed all disposables");
     ClineProvider.activeInstances.delete(this);
   }
@@ -522,21 +516,6 @@ export class ClineProvider implements vscode.WebviewViewProvider {
           case "cancelTask":
             this.cancelTask();
             break;
-          case "openMcpSettings": {
-            const mcpSettingsFilePath = await this.mcpHub?.getMcpSettingsFilePath();
-            if (mcpSettingsFilePath) {
-              openFile(mcpSettingsFilePath);
-            }
-            break;
-          }
-          case "restartMcpServer": {
-            try {
-              await this.mcpHub?.restartConnection(message.text!);
-            } catch (error) {
-              console.error(`Failed to retry connection for ${message.text}:`, error);
-            }
-            break;
-          }
           // Add more switch case statements here as more webview message commands
           // are created within the webview context (i.e. inside media/main.js)
         }
@@ -575,18 +554,6 @@ export class ClineProvider implements vscode.WebviewViewProvider {
       this.cline.customInstructions = instructions || undefined;
     }
     await this.postStateToWebview();
-  }
-
-  // MCP
-
-  async ensureMcpServersDirectoryExists(): Promise<string> {
-    const mcpServersDir = path.join(os.homedir(), "Documents", "Clama", "MCP");
-    try {
-      await fs.mkdir(mcpServersDir, { recursive: true });
-    } catch (error) {
-      return "~/Documents/Cline/MCP"; // in case creating a directory in documents fails for whatever reason (e.g. permissions) - this is fine since this path is only ever used in the system prompt
-    }
-    return mcpServersDir;
   }
 
   async ensureSettingsDirectoryExists(): Promise<string> {

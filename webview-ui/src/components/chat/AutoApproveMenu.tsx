@@ -39,13 +39,7 @@ const ACTION_METADATA: {
 		label: "Use the browser",
 		shortName: "Browser",
 		description: "Allows ability to launch and interact with any website in a headless browser.",
-	},
-	{
-		id: "useMcp",
-		label: "Use MCP servers",
-		shortName: "MCP",
-		description: "Allows use of configured MCP servers which may modify filesystem or interact with APIs.",
-	},
+	}
 ]
 
 const AutoApproveMenu = ({ style }: AutoApproveMenuProps) => {

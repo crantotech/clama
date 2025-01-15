@@ -14,7 +14,7 @@ Target features include:
 
 <a href="https://marketplace.visualstudio.com/items?itemName=crantotech.clama" target="_blank"><strong>Download on VS Marketplace</strong></a>
 
-Clama can handle complex software development tasks step-by-step. With tools that let him create & edit files, explore large projects, use the browser, and execute terminal commands (after you grant permission), it can assist you in ways that go beyond code completion or tech support. Clama can even use the Model Context Protocol (MCP) to create new tools and extend his own capabilities. While autonomous AI scripts traditionally run in sandboxed environments, this extension provides a human-in-the-loop GUI to approve every file change and terminal command, providing a safe and accessible way to explore the potential of agentic AI.
+Clama can handle complex software development tasks step-by-step. With tools that let him create & edit files, explore large projects, use the browser, and execute terminal commands (after you grant permission), it can assist you in ways that go beyond code completion or tech support. While autonomous AI scripts traditionally run in sandboxed environments, this extension provides a human-in-the-loop GUI to approve every file change and terminal command, providing a safe and accessible way to explore the potential of agentic AI.
 
 1. Enter your task and add images to convert mockups into functional apps or fix bugs with screenshots.
 2. Clama starts by analyzing your file structure & source code ASTs, running regex searches, and reading relevant files to get up to speed in existing projects. By carefully managing what information is added to context, Clama can provide valuable assistance even for large, complex projects without overwhelming the context window.
@@ -48,14 +48,6 @@ All changes made by Clama are recorded in your file's Timeline, providing an eas
 ### Use the Browser
 
 With Claude 3.5 Sonnet's new [Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use) capability, Clama can launch a browser, click elements, type text, and scroll, capturing screenshots and console logs at each step. This allows for interactive debugging, end-to-end testing, and even general web use! This gives him autonomy to fixing visual bugs and runtime issues without you needing to handhold and copy-pasting error logs yourself.
-
-### "add a tool that..."
-
-Thanks to the [Model Context Protocol](https://github.com/modelcontextprotocol), Clama can extend his capabilities through custom tools. While you can use [community-made servers](https://github.com/modelcontextprotocol/servers), Clama can instead create and install tools tailored to your specific workflow. Just ask Clama to "add a tool" and it will handle everything, from creating a new MCP server to installing it into the extension. These custom tools then become part of Clama's toolkit, ready to use in future tasks.
-
--   "add a tool that fetches Jira tickets": Retrieve ticket ACs and put Clama to work
--   "add a tool that manages AWS EC2s": Check server metrics and scale instances up or down
--   "add a tool that pulls the latest PagerDuty incidents": Fetch details and ask Clama to fix bugs
 
 ### Add Context
 

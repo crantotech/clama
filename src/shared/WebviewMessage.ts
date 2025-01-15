@@ -23,8 +23,6 @@ export interface WebviewMessage {
     | "openMention"
     | "cancelTask"
     | "refreshOpenRouterModels"
-    | "openMcpSettings"
-    | "restartMcpServer"
     | "autoApprovalSettings"
     | "checkpointDiff"
     | "checkpointRestore"

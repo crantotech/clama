@@ -1,19 +1,18 @@
 import { VSCodeBadge, VSCodeProgressRing } from "@vscode/webview-ui-toolkit/react"
 import deepEqual from "fast-deep-equal"
-import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import type React from "react"
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useEvent, useSize } from "react-use"
 import styled from "styled-components"
 import {
-	ClineApiReqInfo,
-	ClineAskUseMcpServer,
-	ClineMessage,
-	ClineSayTool,
-	ExtensionMessage,
+	type ClineApiReqInfo,
+	type ClineMessage,
+	type ClineSayTool,
+	type ExtensionMessage,
 	COMPLETION_RESULT_CHANGES_FLAG,
 } from "../../../../src/shared/ExtensionMessage"
 import { COMMAND_OUTPUT_STRING, COMMAND_REQ_APP_STRING } from "../../../../src/shared/combineCommandSequences"
 import { useExtensionState } from "../../context/ExtensionStateContext"
-import { findMatchingResourceOrTemplate } from "../../utils/mcp"
 import { vscode } from "../../utils/vscode"
 import { CheckpointControls, CheckpointOverlay } from "../common/CheckpointControls"
 import CodeAccordian, { removeLeadingNonAlphanumeric } from "../common/CodeAccordian"
@@ -21,8 +20,6 @@ import CodeBlock, { CODE_BLOCK_BG_COLOR } from "../common/CodeBlock"
 import MarkdownBlock from "../common/MarkdownBlock"
 import SuccessButton from "../common/SuccessButton"
 import Thumbnails from "../common/Thumbnails"
-import McpResourceRow from "../mcp/McpResourceRow"
-import McpToolRow from "../mcp/McpToolRow"
 import { highlightMentions } from "./TaskHeader"
 
 const ChatRowContainer = styled.div`
@@ -60,9 +57,7 @@ const ChatRow = memo(
 				message.say === "command" ||
 				message.ask === "command" ||
 				message.say === "completion_result" ||
-				message.ask === "completion_result" ||
-				message.say === "use_mcp_server" ||
-				message.ask === "use_mcp_server")
+				message.ask === "completion_result" )
 
 		if (shouldShowCheckpoints && isLast) {
 			shouldShowCheckpoints =
@@ -99,8 +94,6 @@ const ChatRow = memo(
 export default ChatRow
 
 export const ChatRowContent = ({ message, isExpanded, onToggleExpand, lastModifiedMessage, isLast }: ChatRowContentProps) => {
-	const { mcpServers } = useExtensionState()
-
 	const [seeNewChangesDisabled, setSeeNewChangesDisabled] = useState(false)
 
 	const [cost, apiReqCancelReason, apiReqStreamingFailedMessage] = useMemo(() => {
@@ -119,8 +112,6 @@ export const ChatRowContent = ({ message, isExpanded, onToggleExpand, lastModifi
 		isLast &&
 		(lastModifiedMessage?.ask === "command" || lastModifiedMessage?.say === "command") &&
 		lastModifiedMessage?.text?.includes(COMMAND_OUTPUT_STRING)
-
-	const isMcpServerResponding = isLast && lastModifiedMessage?.say === "mcp_server_request_started"
 
 	const type = message.type === "ask" ? message.ask : message.say
 
@@ -187,33 +178,6 @@ export const ChatRowContent = ({ message, isExpanded, onToggleExpand, lastModifi
 					),
 					<span style={{ color: normalColor, fontWeight: "bold" }}>
 						{message.type === "ask" ? "Clama wants to execute this command:" : "Clama executed this command:"}
-					</span>,
-				]
-			case "use_mcp_server":
-				const mcpServerUse = JSON.parse(message.text || "{}") as ClineAskUseMcpServer
-				return [
-					isMcpServerResponding ? (
-						<ProgressIndicator />
-					) : (
-						<span
-							className="codicon codicon-server"
-							style={{
-								color: normalColor,
-								marginBottom: "-1.5px",
-							}}></span>
-					),
-					<span style={{ color: normalColor, fontWeight: "bold" }}>
-						{message.type === "ask" ? (
-							<>
-								Clama wants to {mcpServerUse.type === "use_mcp_tool" ? "use a tool" : "access a resource"} on the{" "}
-								<code>{mcpServerUse.serverName}</code> MCP server:
-							</>
-						) : (
-							<>
-								Clama {mcpServerUse.type === "use_mcp_tool" ? "used a tool" : "accessed a resource"} on the{" "}
-								<code>{mcpServerUse.serverName}</code> MCP server:
-							</>
-						)}
 					</span>,
 				]
 			case "completion_result":
@@ -304,7 +268,6 @@ export const ChatRowContent = ({ message, isExpanded, onToggleExpand, lastModifi
 		apiRequestFailedMessage,
 		isCommandExecuting,
 		apiReqCancelReason,
-		isMcpServerResponding,
 		message.text,
 		message.type,
 	])
@@ -647,77 +610,6 @@ export const ChatRowContent = ({ message, isExpanded, onToggleExpand, lastModifi
 		)
 	}
 
-	if (message.ask === "use_mcp_server" || message.say === "use_mcp_server") {
-		const useMcpServer = JSON.parse(message.text || "{}") as ClineAskUseMcpServer
-		const server = mcpServers.find((server) => server.name === useMcpServer.serverName)
-		return (
-			<>
-				<div style={headerStyle}>
-					{icon}
-					{title}
-				</div>
-
-				<div
-					style={{
-						background: "var(--vscode-textCodeBlock-background)",
-						borderRadius: "3px",
-						padding: "8px 10px",
-						marginTop: "8px",
-					}}>
-					{useMcpServer.type === "access_mcp_resource" && (
-						<McpResourceRow
-							item={{
-								// Use the matched resource/template details, with fallbacks
-								...(findMatchingResourceOrTemplate(
-									useMcpServer.uri || "",
-									server?.resources,
-									server?.resourceTemplates,
-								) || {
-									name: "",
-									mimeType: "",
-									description: "",
-								}),
-								// Always use the actual URI from the request
-								uri: useMcpServer.uri || "",
-							}}
-						/>
-					)}
-
-					{useMcpServer.type === "use_mcp_tool" && (
-						<>
-							<McpToolRow
-								tool={{
-									name: useMcpServer.toolName || "",
-									description:
-										server?.tools?.find((tool) => tool.name === useMcpServer.toolName)?.description || "",
-								}}
-							/>
-							{useMcpServer.arguments && useMcpServer.arguments !== "{}" && (
-								<div style={{ marginTop: "8px" }}>
-									<div
-										style={{
-											marginBottom: "4px",
-											opacity: 0.8,
-											fontSize: "12px",
-											textTransform: "uppercase",
-										}}>
-										Arguments
-									</div>
-									<CodeAccordian
-										code={useMcpServer.arguments}
-										language="json"
-										isExpanded={true}
-										onToggleExpand={onToggleExpand}
-									/>
-								</div>
-							)}
-						</>
-					)}
-				</div>
-			</>
-		)
-	}
-
 	switch (message.type) {
 		case "say":
 			switch (message.say) {
@@ -1016,28 +908,6 @@ export const ChatRowContent = ({ message, isExpanded, onToggleExpand, lastModifi
 										Still having trouble?
 									</a>
 								</div>
-							</div>
-						</>
-					)
-				case "mcp_server_response":
-					return (
-						<>
-							<div style={{ paddingTop: 0 }}>
-								<div
-									style={{
-										marginBottom: "4px",
-										opacity: 0.8,
-										fontSize: "12px",
-										textTransform: "uppercase",
-									}}>
-									Response
-								</div>
-								<CodeAccordian
-									code={message.text}
-									language="json"
-									isExpanded={true}
-									onToggleExpand={onToggleExpand}
-								/>
 							</div>
 						</>
 					)

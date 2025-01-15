@@ -66,11 +66,6 @@
         "icon": "$(add)"
       },
       {
-        "command": "clama.mcpButtonClicked",
-        "title": "MCP Servers",
-        "icon": "$(server)"
-      },
-      {
         "command": "clama.historyButtonClicked",
         "title": "History",
         "icon": "$(history)"
@@ -96,11 +91,6 @@
         {
           "command": "clama.plusButtonClicked",
           "group": "navigation@1",
-          "when": "view == clama.SidebarProvider"
-        },
-        {
-          "command": "clama.mcpButtonClicked",
-          "group": "navigation@2",
           "when": "view == clama.SidebarProvider"
         },
         {

@@ -3,7 +3,6 @@
 import type { AutoApprovalSettings } from "./AutoApprovalSettings";
 import type { HistoryItem } from "./HistoryItem";
 import type { ApiConfiguration, ModelInfo } from "./api";
-import type { McpServer } from "./mcp";
 
 // webview will hold state
 export interface ExtensionMessage {
@@ -18,10 +17,9 @@ export interface ExtensionMessage {
     | "invoke"
     | "partialMessage"
     | "openRouterModels"
-    | "mcpServers"
     | "relinquishControl";
   text?: string;
-  action?: "chatButtonClicked" | "mcpButtonClicked" | "settingsButtonClicked" | "historyButtonClicked" | "didBecomeVisible";
+  action?: "chatButtonClicked" | "settingsButtonClicked" | "historyButtonClicked" | "didBecomeVisible";
   invoke?: "sendMessage" | "primaryButtonClick" | "secondaryButtonClick";
   state?: ExtensionState;
   images?: string[];
@@ -30,7 +28,6 @@ export interface ExtensionMessage {
   filePaths?: string[];
   partialMessage?: ClineMessage;
   openRouterModels?: Record<string, ModelInfo>;
-  mcpServers?: McpServer[];
 }
 
 export interface ExtensionState {
@@ -70,8 +67,7 @@ export type ClineAsk =
   | "resume_completed_task"
   | "mistake_limit_reached"
   | "auto_approval_max_req_reached"
-  | "browser_action_launch"
-  | "use_mcp_server";
+  | "browser_action_launch";
 
 export type ClineSay =
   | "task"
@@ -90,9 +86,6 @@ export type ClineSay =
   | "browser_action_launch"
   | "browser_action"
   | "browser_action_result"
-  | "mcp_server_request_started"
-  | "mcp_server_response"
-  | "use_mcp_server"
   | "diff_error"
   | "deleted_api_reqs";
 
@@ -128,14 +121,6 @@ export type BrowserActionResult = {
   currentUrl?: string;
   currentMousePosition?: string;
 };
-
-export interface ClineAskUseMcpServer {
-  serverName: string;
-  type: "use_mcp_tool" | "access_mcp_resource";
-  toolName?: string;
-  arguments?: string;
-  uri?: string;
-}
 
 export interface ClineApiReqInfo {
   request?: string;
