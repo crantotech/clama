@@ -216,7 +216,7 @@ const AutoApproveMenu = ({ style }: AutoApproveMenuProps) => {
 							color: "var(--vscode-descriptionForeground)",
 							fontSize: "12px",
 						}}>
-						Auto-approve allows Cline to perform the following actions without asking for permission. Please use with
+						Auto-approve allows Clama to perform the following actions without asking for permission. Please use with
 						caution and only enable if you understand the risks.
 					</div>
 					{ACTION_METADATA.map((action) => (
@@ -284,7 +284,7 @@ const AutoApproveMenu = ({ style }: AutoApproveMenuProps) => {
 							fontSize: "12px",
 							marginBottom: "10px",
 						}}>
-						Cline will automatically make this many API requests before asking for approval to proceed with the task.
+						Clama will automatically make this many API requests before asking for approval to proceed with the task.
 					</div>
 					<div style={{ margin: "6px 0" }}>
 						<VSCodeCheckbox
@@ -301,7 +301,7 @@ const AutoApproveMenu = ({ style }: AutoApproveMenuProps) => {
 								color: "var(--vscode-descriptionForeground)",
 								fontSize: "12px",
 							}}>
-							Receive system notifications when Cline requires approval to proceed or when a task is completed.
+							Receive system notifications when Clama requires approval to proceed or when a task is completed.
 						</div>
 					</div>
 				</div>
