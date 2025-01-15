@@ -1,4 +1,4 @@
-import { Anthropic } from "@anthropic-ai/sdk"
+import type { Anthropic } from "@anthropic-ai/sdk";
 
 /*
 We can't implement a dynamically updating sliding window as it would break prompt cache
@@ -53,37 +53,37 @@ truncated = getTruncatedMessages(messages, deletedRange);
 */
 
 export function getNextTruncationRange(
-	messages: Anthropic.Messages.MessageParam[],
-	currentDeletedRange: [number, number] | undefined = undefined,
+  messages: Anthropic.Messages.MessageParam[],
+  currentDeletedRange: [number, number] | undefined = undefined,
 ): [number, number] {
-	// Since we always keep the first message, currentDeletedRange[0] will always be 1 (for now until we have a smarter truncation algorithm)
-	const rangeStartIndex = 1
-	const startOfRest = currentDeletedRange ? currentDeletedRange[1] + 1 : 1
+  // Since we always keep the first message, currentDeletedRange[0] will always be 1 (for now until we have a smarter truncation algorithm)
+  const rangeStartIndex = 1;
+  const startOfRest = currentDeletedRange ? currentDeletedRange[1] + 1 : 1;
 
-	// Remove half of user-assistant pairs
-	const messagesToRemove = Math.floor((messages.length - startOfRest) / 4) * 2 // Keep even number
-	let rangeEndIndex = startOfRest + messagesToRemove - 1
+  // Remove half of user-assistant pairs
+  const messagesToRemove = Math.floor((messages.length - startOfRest) / 4) * 2; // Keep even number
+  let rangeEndIndex = startOfRest + messagesToRemove - 1;
 
-	// Make sure the last message being removed is a user message, so that the next message after the initial task message is an assistant message. This preservers the user-assistant-user-assistant structure.
-	// NOTE: anthropic format messages are always user-assitant-user-assistant, while openai format messages can have multiple user messages in a row (we use anthropic format throughout clama)
-	if (messages[rangeEndIndex].role !== "user") {
-		rangeEndIndex -= 1
-	}
+  // Make sure the last message being removed is a user message, so that the next message after the initial task message is an assistant message. This preservers the user-assistant-user-assistant structure.
+  // NOTE: anthropic format messages are always user-assitant-user-assistant, while openai format messages can have multiple user messages in a row (we use anthropic format throughout clama)
+  if (messages[rangeEndIndex].role !== "user") {
+    rangeEndIndex -= 1;
+  }
 
-	// this is an inclusive range that will be removed from the conversation history
-	return [rangeStartIndex, rangeEndIndex]
+  // this is an inclusive range that will be removed from the conversation history
+  return [rangeStartIndex, rangeEndIndex];
 }
 
 export function getTruncatedMessages(
-	messages: Anthropic.Messages.MessageParam[],
-	deletedRange: [number, number] | undefined,
+  messages: Anthropic.Messages.MessageParam[],
+  deletedRange: [number, number] | undefined,
 ): Anthropic.Messages.MessageParam[] {
-	if (!deletedRange) {
-		return messages
-	}
+  if (!deletedRange) {
+    return messages;
+  }
 
-	const [start, end] = deletedRange
-	// the range is inclusive - both start and end indices and everything in between will be removed from the final result.
-	// NOTE: if you try to console log these, don't forget that logging a reference to an array may not provide the same result as logging a slice() snapshot of that array at that exact moment. The following DOES in fact include the latest assistant message.
-	return [...messages.slice(0, start), ...messages.slice(end + 1)]
+  const [start, end] = deletedRange;
+  // the range is inclusive - both start and end indices and everything in between will be removed from the final result.
+  // NOTE: if you try to console log these, don't forget that logging a reference to an array may not provide the same result as logging a slice() snapshot of that array at that exact moment. The following DOES in fact include the latest assistant message.
+  return [...messages.slice(0, start), ...messages.slice(end + 1)];
 }
